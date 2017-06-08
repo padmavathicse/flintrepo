@@ -6,7 +6,7 @@
 
 $lang=en
 
-$productCatalog=flintProductCatalog
+$productCatalog=flintgroupProductCatalog
 
 UPDATE Catalog;id[unique=true];name[lang=$lang]
-;$productCatalog;"Flint Product Catalog";
+;$productCatalog;"Flintgroup Product Catalog";

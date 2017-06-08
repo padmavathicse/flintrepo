@@ -13,10 +13,6 @@
 	<extension abstractclassprefix="Generated" classprefix="Flintyb2bStorefront" name="flintyb2bstorefront" usemaven="false">		
         <!--<requires-extension name="secureportaladdon"/>-->
 
-
-
-
-
 <requires-extension name="secureportaladdon"/>
 <requires-extension name="commerceorgaddon"/>
 <requires-extension name="b2bacceleratoraddon"/>

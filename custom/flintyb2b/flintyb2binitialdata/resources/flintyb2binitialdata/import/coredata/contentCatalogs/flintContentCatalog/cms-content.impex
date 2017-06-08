@@ -1,7 +1,7 @@
 #
 # Import the CMS content for the Flint site
 #
-$contentCatalog=flintContentCatalog
+$contentCatalog=flintgroupContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 
 # Import modulegen config properties into impex macros

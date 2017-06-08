@@ -1,6 +1,6 @@
 ##******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
 
-$contentCatalog=powertoolsContentCatalog
+$contentCatalog=flintgroupContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $picture=media(code, $contentCV);
 $siteResource=jar:de.hybris.platform.powertoolsstore.constants.PowertoolsStoreConstants&/powertoolsstore/import/sampledata/contentCatalogs/$contentCatalog
@@ -17,6 +17,12 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 
 # CMS Link Components
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;UVOffsetCategoryLink;"UV Offset"
+;;SheetfedCategoryLink;"Sheet feed"
+;;FlexographyCategoryLink;"Flexography"
+;;ChipsCategoryLink;"Chips"
+;;ResinsAndAdditivesCategoryLink;"Resins And Additives"
+;;PigmentsCategoryLink;"Pigments"
 ;;AboutAcceleratorLink;"About Commerce Accelerator"
 ;;AboutHybrisLink;"About hybris"
 ;;AddressBookLink;"Address Book"
@@ -150,71 +156,10 @@ UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[l
  ;;PremiumbuyersgroupHomepageProductCarouselComponent;"Our Bestselling Products"
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
-;widescreen;Powertools_1400x480_BigSplash_EN_01_1400W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_1400x480_BigSplash_EN_01_1400W.jpg;Powertools_1400x480_BigSplash_EN_01_1400W.jpg;"The Most Powerful Tools in their Price Range";
-;widescreen;Powertools_1400x70_Brands_EN_01_1400W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_1400x70_Brands_EN_01_1400W.jpg;Powertools_1400x70_Brands_EN_01_1400W.jpg;"Bosch | Black & Decker | Einhall | Skil | Hitachi";
-;mobile;Powertools_160x139_24Service_EN_01_160W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_160x139_24Service_EN_01_160W.jpg;Powertools_160x139_24Service_EN_01_160W.jpg;"24/7 - Great Service After You Buy";
-;mobile;Powertools_160x139_25Deal_EN_01_160W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_160x139_25Deal_EN_01_160W.jpg;Powertools_160x139_25Deal_EN_01_160W.jpg;"25% Great Prices and Great Deals";
-;mobile;Powertools_160x139_30Day_EN_01_160W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_160x139_30Day_EN_01_160W.jpg;Powertools_160x139_30Day_EN_01_160W.jpg;"30 Day - Shop with Confidence";
-;mobile;Powertools_160x139_6pm_EN_01_160W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_160x139_6pm_EN_01_160W.jpg;Powertools_160x139_6pm_EN_01_160W.jpg;"6pm - Order by 6pm for Same Day Shipping";
-;desktop;Powertools_240x200_24Service_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_240x200_24Service_EN_01_240W.jpg;Powertools_240x200_24Service_EN_01_240W.jpg;"24/7 - Great Service After You Buy";
-;desktop;Powertools_240x200_25Deal_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_240x200_25Deal_EN_01_240W.jpg;Powertools_240x200_25Deal_EN_01_240W.jpg;"25% Great Prices and Great Deals";
-;desktop;Powertools_240x200_30Day_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_240x200_30Day_EN_01_240W.jpg;Powertools_240x200_30Day_EN_01_240W.jpg;"30 Day - Shop with Confidence";
-;desktop;Powertools_240x200_6pm_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_240x200_6pm_EN_01_240W.jpg;Powertools_240x200_6pm_EN_01_240W.jpg;"6pm - Order by 6pm for Same Day Shipping";
-;desktop;Powertools_240x200_AngleGrinders_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_240x200_AngleGrinders_EN_01_240W.jpg;Powertools_240x200_AngleGrinders_EN_01_240W.jpg;"Angle Grinders";
-;desktop;Powertools_240x200_PowerDrills_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_240x200_PowerDrills_EN_01_240W.jpg;Powertools_240x200_PowerDrills_EN_01_240W.jpg;"Power Drills";
-;desktop;Powertools_240x200_Sanders_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_240x200_Sanders_EN_01_240W.jpg;Powertools_240x200_Sanders_EN_01_240W.jpg;"Sanders";
-;desktop;Powertools_240x200_Screwdrivers_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_240x200_Screwdrivers_EN_01_240W.jpg;Powertools_240x200_Screwdrivers_EN_01_240W.jpg;"Screwdrivers";
-;mobile;Powertools_320x100_Brands_EN_01_320W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_320x100_Brands_EN_01_320W.jpg;Powertools_320x100_Brands_EN_01_320W.jpg;"Bosch | Black & Decker | Einhall | Skil | Hitachi";
-;mobile;Powertools_320x260_AngleGrinders_EN_01_320W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_320x260_AngleGrinders_EN_01_320W.jpg;Powertools_320x260_AngleGrinders_EN_01_320W.jpg;"Angle Grinders";
-;mobile;Powertools_320x260_PowerDrills_EN_01_320W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_320x260_PowerDrills_EN_01_320W.jpg;Powertools_320x260_PowerDrills_EN_01_320W.jpg;"Power Drills";
-;mobile;Powertools_320x260_Sanders_EN_01_320W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_320x260_Sanders_EN_01_320W.jpg;Powertools_320x260_Sanders_EN_01_320W.jpg;"Sanders";
-;mobile;Powertools_320x260_Screwdrivers_EN_01_320W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_320x260_Screwdrivers_EN_01_320W.jpg;Powertools_320x260_Screwdrivers_EN_01_320W.jpg;"Screwdrivers";
-;mobile;Powertools_320x300_BigSplash_EN_01_320W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_320x300_BigSplash_EN_01_320W.jpg;Powertools_320x300_BigSplash_EN_01_320W.jpg;"The Most Powerful Tools in their Price Range";
-;widescreen;Powertools_350x280_24Service_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_350x280_24Service_EN_01_350W.jpg;Powertools_350x280_24Service_EN_01_350W.jpg;"24/7 - Great Service After You Buy";
-;widescreen;Powertools_350x280_25Deal_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_350x280_25Deal_EN_01_350W.jpg;Powertools_350x280_25Deal_EN_01_350W.jpg;"25% Great Prices and Great Deals";
-;widescreen;Powertools_350x280_30Day_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_350x280_30Day_EN_01_350W.jpg;Powertools_350x280_30Day_EN_01_350W.jpg;"30 Day - Shop with Confidence";
-;widescreen;Powertools_350x280_6pm_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_350x280_6pm_EN_01_350W.jpg;Powertools_350x280_6pm_EN_01_350W.jpg;"6pm - Order by 6pm for Same Day Shipping";
-;widescreen;Powertools_350x290_AngleGrinders_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_350x290_AngleGrinders_EN_01_350W.jpg;Powertools_350x290_AngleGrinders_EN_01_350W.jpg;"Angle Grinders";
-;widescreen;Powertools_350x290_PowerDrills_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_350x290_PowerDrills_EN_01_350W.jpg;Powertools_350x290_PowerDrills_EN_01_350W.jpg;"Power Drills";
-;widescreen;Powertools_350x290_Sanders_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_350x290_Sanders_EN_01_350W.jpg;Powertools_350x290_Sanders_EN_01_350W.jpg;"Sanders";
-;widescreen;Powertools_350x290_Screwdrivers_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_350x290_Screwdrivers_EN_01_350W.jpg;Powertools_350x290_Screwdrivers_EN_01_350W.jpg;"Screwdrivers";
-;tablet;Powertools_385x280_24Service_EN_01_385W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_385x280_24Service_EN_01_385W.jpg;Powertools_385x280_24Service_EN_01_385W.jpg;"24/7 - Great Service After You Buy";
-;tablet;Powertools_385x280_25Deal_EN_01_385W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_385x280_25Deal_EN_01_385W.jpg;Powertools_385x280_25Deal_EN_01_385W.jpg;"25% Great Prices and Great Deals";
-;tablet;Powertools_385x280_30Day_EN_01_385W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_385x280_30Day_EN_01_385W.jpg;Powertools_385x280_30Day_EN_01_385W.jpg;"30 Day - Shop with Confidence";
-;tablet;Powertools_385x280_6pm_EN_01_385W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_385x280_6pm_EN_01_385W.jpg;Powertools_385x280_6pm_EN_01_385W.jpg;"6pm - Order by 6pm for Same Day Shipping";
-;tablet;Powertools_385x290_AngleGrinders_EN_01_385W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_385x290_AngleGrinders_EN_01_385W.jpg;Powertools_385x290_AngleGrinders_EN_01_385W.jpg;"Angle Grinders";
-;tablet;Powertools_385x290_PowerDrills_EN_01_385W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_385x290_PowerDrills_EN_01_385W.jpg;Powertools_385x290_PowerDrills_EN_01_385W.jpg;"Power Drills";
-;tablet;Powertools_385x290_Sanders_EN_01_385W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_385x290_Sanders_EN_01_385W.jpg;Powertools_385x290_Sanders_EN_01_385W.jpg;"Sanders";
-;tablet;Powertools_385x290_Screwdrivers_EN_01_385W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_385x290_Screwdrivers_EN_01_385W.jpg;Powertools_385x290_Screwdrivers_EN_01_385W.jpg;"Screwdrivers";
-;tablet;Powertools_770x350_BigSplash_EN_01_770W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_770x350_BigSplash_EN_01_770W.jpg;Powertools_770x350_BigSplash_EN_01_770W.jpg;"The Most Powerful Tools in their Price Range";
-;tablet;Powertools_770x70_Brands_EN_01_770W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_770x70_Brands_EN_01_770W.jpg;Powertools_770x70_Brands_EN_01_770W.jpg;"Bosch | Black & Decker | Einhall | Skil | Hitachi";
-;desktop;Powertools_960x400_BigSplash_EN_01_960W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_960x400_BigSplash_EN_01_960W.jpg;Powertools_960x400_BigSplash_EN_01_960W.jpg;"The Most Powerful Tools in their Price Range";
-;desktop;Powertools_960x70_Brands_EN_01_960W.jpg;$siteResource/images/banners/homepage/responsive/Powertools_960x70_Brands_EN_01_960W.jpg;Powertools_960x70_Brands_EN_01_960W.jpg;"Bosch | Black & Decker | Einhall | Skil | Hitachi";
 
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
-;powertools-homepage-24/7service-en;Powertools_350x280_24Service_EN_01_350W.jpg,Powertools_240x200_24Service_EN_01_240W.jpg,Powertools_160x139_24Service_EN_01_160W.jpg,Powertools_385x280_24Service_EN_01_385W.jpg
-;powertools-homepage-25%-deal-en;Powertools_350x280_25Deal_EN_01_350W.jpg,Powertools_240x200_25Deal_EN_01_240W.jpg,Powertools_160x139_25Deal_EN_01_160W.jpg,Powertools_385x280_25Deal_EN_01_385W.jpg
-;powertools-homepage-30Day-en;Powertools_350x280_30Day_EN_01_350W.jpg,Powertools_240x200_30Day_EN_01_240W.jpg,Powertools_160x139_30Day_EN_01_160W.jpg,Powertools_385x280_30Day_EN_01_385W.jpg
-;powertools-homepage-6pm-en;Powertools_350x280_6pm_EN_01_350W.jpg,Powertools_240x200_6pm_EN_01_240W.jpg,Powertools_160x139_6pm_EN_01_160W.jpg,Powertools_385x280_6pm_EN_01_385W.jpg
-;powertools-homepage-anglegranders-en;Powertools_350x290_AngleGrinders_EN_01_350W.jpg,Powertools_240x200_AngleGrinders_EN_01_240W.jpg,Powertools_320x260_AngleGrinders_EN_01_320W.jpg,Powertools_385x290_AngleGrinders_EN_01_385W.jpg
-;powertools-homepage-brands-en;Powertools_1400x70_Brands_EN_01_1400W.jpg,Powertools_960x70_Brands_EN_01_960W.jpg,Powertools_320x100_Brands_EN_01_320W.jpg,Powertools_770x70_Brands_EN_01_770W.jpg
-;powertools-homepage-powerdrills-en;Powertools_350x290_PowerDrills_EN_01_350W.jpg,Powertools_240x200_PowerDrills_EN_01_240W.jpg,Powertools_320x260_PowerDrills_EN_01_320W.jpg,Powertools_385x290_PowerDrills_EN_01_385W.jpg
-;powertools-homepage-sanders-en;Powertools_350x290_Sanders_EN_01_350W.jpg,Powertools_240x200_Sanders_EN_01_240W.jpg,Powertools_320x260_Sanders_EN_01_320W.jpg,Powertools_385x290_Sanders_EN_01_385W.jpg
-;powertools-homepage-screwdrivers-en;Powertools_350x290_Screwdrivers_EN_01_350W.jpg,Powertools_240x200_Screwdrivers_EN_01_240W.jpg,Powertools_320x260_Screwdrivers_EN_01_320W.jpg,Powertools_385x290_Screwdrivers_EN_01_385W.jpg
-;powertools-homepage-spalsh-en;Powertools_1400x480_BigSplash_EN_01_1400W.jpg,Powertools_960x400_BigSplash_EN_01_960W.jpg,Powertools_320x300_BigSplash_EN_01_320W.jpg,Powertools_770x350_BigSplash_EN_01_770W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;PowertoolsHompage24/7BannerComponent;powertools-homepage-24/7service-en
-;;PowertoolsHompage25%BannerComponent;powertools-homepage-25%-deal-en
-;;PowertoolsHompage30dayBannerComponent;powertools-homepage-30Day-en
-;;PowertoolsHompage6pmBannerComponent;powertools-homepage-6pm-en
-;;PowertoolsHompageAngleGrindersBannerComponent;powertools-homepage-anglegranders-en
-;;PowertoolsHompagePowerDrillsBannerComponent;powertools-homepage-powerdrills-en
-;;PowertoolsHompageSandersBannerComponent;powertools-homepage-sanders-en
-;;PowertoolsHompageScrewdriversBannerComponent;powertools-homepage-screwdrivers-en
-;;PowertoolsHompageSplashBannerComponent;powertools-homepage-spalsh-en
-;;PowetoolsHompageBrandsBannerComponent;powertools-homepage-brands-en
-
 
 # Powertools Search Results Page
 

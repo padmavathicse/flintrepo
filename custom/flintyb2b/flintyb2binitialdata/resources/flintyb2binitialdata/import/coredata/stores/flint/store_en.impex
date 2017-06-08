@@ -6,7 +6,7 @@
 
 $lang=en
 
-$storeUid=flint
+$storeUid=flintgroup
 
 UPDATE BaseStore;uid[unique=true];name[lang=$lang]
-;$storeUid;"Flint Store";
+;$storeUid;"Flintgroup Store";
