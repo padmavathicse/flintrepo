@@ -1,0 +1,10 @@
+#
+# Import the Flint Content Catalog
+#
+
+# Language
+$lang=de
+
+# Create Content Catalog
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
+ ;flintContentCatalog;"Flint-Inhaltskatalog"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<groups xmlns="http://www.isdc.ro/wro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+   <group name="addons_responsive">
+      <js>/_ui/addons/secureportaladdon/responsive/common/js/secureportaladdon.js</js>
+   </group>
+   <group name="addons_desktop"></group>
+   <group name="addons_mobile"></group>
+</groups>
+

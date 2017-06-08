@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2016 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <alias alias="b2bAcceleratorCoreSystemSetup" name="flintStoreSystemSetup" />
+    <bean id="flintStoreSystemSetup" class="com.flintgroup.initialdata.setup.InitialDataSystemSetup" parent="abstractCoreSystemSetup">
+        <property name="coreDataImportService" ref="coreDataImportService"/>
+        <property name="flintSampleDataImportService" ref="flintSampleDataImportService"/>
+    </bean>
+
+    <bean id="flintSampleDataImportService" class="com.flintgroup.initialdata.impl.FlintSampleDataImportService"
+          parent="sampleDataImportService">
+    </bean>
+
+    <!-- Solr field value providers TEMPORARY FOR NOW SO DO NOT NEED TO DEPEND ON yb2bacceleratorcore -->
+
+    <bean id="flintCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="flintCategorySource"/>
+    </bean>
+    <bean id="flintBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="flintBrandCategorySource"/>
+    </bean>
+    <bean id="flintVariantCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="flintVariantCategorySource"/>
+    </bean>
+
+
+    <bean id="flintCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+        <property name="categorySource" ref="flintCategorySource"/>
+    </bean>
+
+    <bean id="flintBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+        <property name="categorySource" ref="flintBrandCategorySource"/>
+    </bean>
+
+    <bean id="flintCategorySource" parent="variantCategorySource">
+        <property name="rootCategory" value="1"/> <!-- '1' is the root icecat category -->
+    </bean>
+    <bean id="flintVariantCategorySource" parent="variantCategorySource"/>
+
+    <bean id="flintBrandCategorySource" parent="defaultCategorySource">
+        <property name="rootCategory" value="brands"/> <!-- 'brands' is the root of the brands hierarchy -->
+    </bean>
+
+    <!-- Solr field value providers TEMPORARY FOR NOW SO DO NOT NEED TO DEPEND ON yb2bacceleratorcore -->
+
+
+</beans>

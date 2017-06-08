@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:file="http://www.springframework.org/schema/integration/file"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration 
+	http://www.springframework.org/schema/integration/spring-integration.xsd
+	http://www.springframework.org/schema/integration/file 
+	http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/> 
+
+	<bean id="baseDirectoryFlintCustomers" class="java.lang.String">
+		<constructor-arg value="#{baseDirectory}/${tenantId}/customers" />
+	</bean>
+	<!-- 1) Scan for files -->
+	<file:inbound-channel-adapter id="batchFilesFlintCustomers" directory="#{baseDirectoryFlintCustomers}"
+		filename-regex="^(.*)-(\d+)\.csv" comparator="flintFileOrderComparatorForCustomers" prevent-duplicates="false">
+		<int:poller cron="${flint.hotfolder.customers.cron}" />
+	</file:inbound-channel-adapter>
+	
+	<bean id="flintFileOrderComparatorForCustomers"
+		class="de.hybris.platform.acceleratorservices.dataimport.batch.FileOrderComparator">
+		<property name="prefixPriority">
+			<map>
+				<!-- default priority is 0 -->
+				<entry key="CustomerGeneralData" value="6" />
+				<entry key="CustomerSalesData" value="5" />
+				<entry key="CustomerPartnerFunctionsData" value="4" />
+							</map>
+		</property>
+	</bean>
+	
+
+	<!-- 2) move the file to processing and setup header -->
+	<file:outbound-gateway request-channel="batchFilesFlintCustomers" reply-channel="batchFilesFlintCustomersProc"
+		directory="#{baseDirectoryFlintCustomers}/processing"  delete-source-files="true" />
+	<int:service-activator input-channel="batchFilesFlintCustomersProc" output-channel="batchFilesHeaderInit"
+		ref="flintHeaderSetupTaskForCustomers" method="execute" />
+	<bean id="flintHeaderSetupTaskForCustomers" class="de.hybris.platform.acceleratorservices.dataimport.batch.task.HeaderSetupTask">
+		<property name="catalog" value="flintProductCatalog" />
+		<property name="net" value="false" />
+		<property name="storeBaseDirectory" ref="baseDirectoryFlintCustomers" />
+	</bean>
+	
+	<!-- Address import batch -->
+	
+	<bean id="batchAddressConverterMapping"
+		class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+		p:mapping="CustomerGeneralData" p:converter-ref="batchAddressConverter" />
+	
+	<bean id="batchAddressConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter"  >
+		<property name="header">
+			<value>
+
+				INSERT_UPDATE Address   ;code[unique=true]  ;owner(Company.uid)[unique=true]    ;country(isocode)   ;company  ;streetnumber   ;streetname   ;postalcode     ;town   ;state
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>                             ;{+0}               ;FlintAddresses                       ;{2}                ;{3}                                    ;{4}            ;{5}                                        ;{6}            ;{7}    ;{8}
+			</value>
+		</property>
+	</bean>
+	
+	
+	<!--  B2BUnit import batch  -->
+	
+		<bean id="batchB2BUnit1ConverterMapping"
+		class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+		p:mapping="CustomerSalesData" p:converter-ref="batchB2BUnitSalesAreaConverter"  />
+	
+	<bean id="batchB2BUnitSalesAreaConverter"
+         class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter" >
+		<property name="header">
+			<value>
+				INSERT_UPDATE B2BUnit    ;active[default=true]   ;uid[unique=true]   ;locName[lang=en]   ;groups(uid)
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>                             ;                       ;{+1}               ;{+2}               ;FlintCustomers
+			</value>
+		</property>
+	</bean>
+	
+	<!--  Creates UserPriceGroups for B2BUnit sales Area specific pricing  -->
+		<bean id="batchB2BUnit2ConverterMapping"
+		class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+		p:mapping="CustomerSalesData" p:converter-ref="batchUserPriceGroupConverter"  />
+	
+	<bean id="batchUserPriceGroupConverter"
+         class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter" >
+		<property name="header">
+			<value>
+				INSERT_UPDATE UserPriceGroup ;code[unique=true]   ;name[lang=en]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>                                 ;{+0}                ;{0} Pricing
+			</value>
+		</property>
+	</bean>
+	
+	<!--  sales Area B2BUnit -->
+		<bean id="batchB2BUnit3ConverterMapping"
+		class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+		p:mapping="CustomerSalesData" p:converter-ref="batchB2BUnitConverter"  />
+	
+	<bean id="batchB2BUnitConverter"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter" >
+		<property name="header">
+			<value>
+
+				INSERT_UPDATE B2BUnit ;active[default=true]   ;uid[unique=true]   ;userPriceGroup(code)   ;locName[lang=en]  ;groups(uid)    ;lineOfBuisness(code)   ;blocked    ;deleted    ;distributor    ;shippingTerms ;salesArea(code);country(isocode);defaultDeliveryMode(code);
+			</value>
+		</property>
+		<property name="impexRow">
+            <value>                         ;                       ;{+0}               ;{0}                    ;{0}_{+2}                                           ;{1}            ;{4}                                                            ;{5}        ;{6}        ;{7}            ;{8}           ;{0}                                               ;{0}                                               ;{11}
+			</value>
+		</property>
+	</bean>
+	
+	
+	
+		<!--  B2BUnit import batch - address linking -->
+		<bean id="batchB2BUnitToAddressConverterMapping"
+		class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+		p:mapping="CustomerPartnerFunctionsData" p:converter-ref="batchB2BUnitToAddressConverter" />
+	
+	<bean id="batchB2BUnitToAddressConverter"
+         class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter" >
+		<property name="header">
+			<value>
+				UPDATE B2BUnit   ;uid[unique=true]   ;soldToAddress(code,owner(Company.uid[default=FlintAddresses]))   ;shipToAddresses(code,owner(Company.uid[default=FlintAddresses]))[collection-delimiter=|]     ;billToAddresses(code,owner(Company.uid[default=FlintAddresses]))[collection-delimiter=|]     ;payerAddresses(code,owner(Company.uid[default=FlintAddresses]))[collection-delimiter=|]  	;IsDefaultShipTo(code,owner(Company.uid[default=FlintAddresses]))		;IsDefaultBillTo(code,owner(Company.uid[default=FlintAddresses]))		;IsDefaultPayer(code,owner(Company.uid[default=FlintAddresses])) 
+            </value>
+		</property>
+		<property name="impexRow">
+			<value>                     ;{+0}               ;{1}                                                            ;{2}                                                                                        ;{3}                                                                                        ;{4}																						;{5}																;{6}																;{7}
+			</value>
+		</property>
+	</bean>
+	
+
+	</beans>

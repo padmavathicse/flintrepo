@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:file="http://www.springframework.org/schema/integration/file"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration 
+	http://www.springframework.org/schema/integration/spring-integration.xsd
+	http://www.springframework.org/schema/integration/file 
+	http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/> 
+
+	<bean id="baseDirectoryFlintProducts" class="java.lang.String">
+		<constructor-arg value="#{baseDirectory}/${tenantId}/products" />
+	</bean>
+	<!-- 1) Scan for files -->
+	<file:inbound-channel-adapter id="batchFilesFlintProducts" directory="#{baseDirectoryFlintProducts}"
+		filename-regex="^(.*)-(\d+)\.csv" comparator="flintFileOrderComparatorForProducts" prevent-duplicates="false">
+		<int:poller cron="${flint.hotfolder.products.cron}" />
+	</file:inbound-channel-adapter>
+	
+	<bean id="flintFileOrderComparatorForProducts"
+		class="de.hybris.platform.acceleratorservices.dataimport.batch.FileOrderComparator">
+		<property name="prefixPriority">
+			<map>
+				<!-- default priority is 0 -->
+				<entry key="products" value="1" />
+			</map>
+		</property>
+	</bean>
+	
+
+	<!-- 2) move the file to processing and setup header -->
+	<file:outbound-gateway request-channel="batchFilesFlintProducts" reply-channel="batchFilesFlintProductsProc"
+		directory="#{baseDirectoryFlintProducts}/processing"  delete-source-files="true" />
+	<int:service-activator input-channel="batchFilesFlintProductsProc" output-channel="batchFilesHeaderInit"
+		ref="flintHeaderSetupTaskForProducts" method="execute" />
+	<bean id="flintHeaderSetupTaskForProducts" class="de.hybris.platform.acceleratorservices.dataimport.batch.task.HeaderSetupTask">
+		<property name="catalog" value="flintProductCatalog" />
+		<property name="net" value="false" />
+		<property name="storeBaseDirectory" ref="baseDirectoryFlintProducts" />
+	</bean>
+	
+	
+
+	<!-- Products data import batch -->
+	
+	<bean id="batchProductsDataConverterMapping"
+		class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+		p:mapping="products" p:converter-ref="batchProductsDataConverter" />
+	
+	<bean id="batchProductsDataConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter" >
+		<property name="header">
+			<value>
+				$productCatalog=flintProductCatalog
+				$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				$lang=en
+				INSERT_UPDATE Product;code[unique=true];name[lang=$lang];description[lang=$lang];$catalogVersion    
+			</value>
+		</property>
+		<property name="impexRow">
+			<value> ;{+0};{1};{2};;
+			</value>
+		</property>
+		<property name="rowFilter">
+ 			<bean class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexRowFilter">
+				<!-- filter-out lines starting with # -->
+				<property name="expression" value="!(row[0].startsWith('#'))"/>
+			</bean>
+ 		</property>
+	</bean>
+</beans>

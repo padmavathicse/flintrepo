@@ -1,0 +1,12 @@
+# 
+# Import the flint BaseStore
+#
+# Localization ja
+#
+
+$lang=ja
+
+$storeUid=flint
+
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+;$storeUid;"動力工具ストア";

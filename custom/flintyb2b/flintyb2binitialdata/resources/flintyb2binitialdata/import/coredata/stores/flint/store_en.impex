@@ -1,0 +1,12 @@
+# 
+# Import the Powertools BaseStore
+#
+# Localization en
+#
+
+$lang=en
+
+$storeUid=flint
+
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+;$storeUid;"Flint Store";

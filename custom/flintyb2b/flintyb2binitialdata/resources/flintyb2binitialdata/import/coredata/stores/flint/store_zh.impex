@@ -1,0 +1,12 @@
+# 
+# Import the flint BaseStore
+#
+# Localization zh
+#
+
+$lang=zh
+
+$storeUid=flint
+
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+;$storeUid;"电动工具店铺";

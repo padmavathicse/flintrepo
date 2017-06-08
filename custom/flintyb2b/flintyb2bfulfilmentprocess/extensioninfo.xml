@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+
+	<extension abstractclassprefix="Generated" classprefix="Flintyb2bFulfilmentProcess" managername="Flintyb2bFulfilmentProcessManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="flintyb2bfulfilmentprocess">
+
+
+		<requires-extension name="acceleratorservices"/>
+		<requires-extension name="ticketsystem"/>
+
+		<coremodule generated="true" manager="com.flintgroup.fulfilmentprocess.jalo.Flintyb2bFulfilmentProcessManager" packageroot="com.flintgroup.fulfilmentprocess"/>
+
+		<meta key="extgen-template-extension" value="true"/>
+		
+
+	</extension>
+
+</extensioninfo>
