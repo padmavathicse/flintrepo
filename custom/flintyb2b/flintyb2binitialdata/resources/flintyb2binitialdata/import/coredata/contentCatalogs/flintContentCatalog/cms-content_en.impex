@@ -2,7 +2,7 @@
 # Import CMS content for the flint site
 #
 
-$contentCatalog=flintContentCatalog
+$contentCatalog=flintgroupContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 
 # Language

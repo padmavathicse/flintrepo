@@ -24,8 +24,6 @@
 	<import resource="classpath:/flintyb2bcore/integration/hot-folder-store-electronics-spring.xml"/>
 	<import resource="classpath:/flintyb2bcore/integration/hot-folder-store-apparel-spring.xml"/>
 	<import resource="classpath:/flintyb2bcore/integration/hot-folder-common-spring.xml"/>
-	<import resource="classpath:/flintyb2bcore/integration/hot-folder-flint-customers-spring.xml"/>
-	<import resource="classpath:/flintyb2bcore/integration/hot-folder-flint-products-spring.xml"/>
 
 	<!-- SystemSetup for the Flintyb2bCore -->
 	<bean id="acceleratorCoreSystemSetup" class="com.flintgroup.core.setup.CoreSystemSetup"

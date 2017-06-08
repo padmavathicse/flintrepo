@@ -1,0 +1,21 @@
+# ImpEx for Importing Products stock levels into flint Store
+
+$productCatalog=flintgroup-zhProductCatalog
+$productCatalogName=Flint Group Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$vendor=flint
+
+INSERT_UPDATE Vendor;code[unique=true];name[lang=en]
+;$vendor;Flint
+
+INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];vendor(code)[default=flint];default[default=true]
+;pw_warehouse_s;flint Warehouse South
+;pw_warehouse_e;flint Warehouse East
+;pw_warehouse_w;flint Warehouse West
+;pw_warehouse_n;flint Warehouse North
+
+INSERT_UPDATE StockLevel;productCode[unique=true];warehouse(code)[unique=true,default=default];available;inStockStatus(code);maxPreOrder[default=1];maxStockLevelHistoryCount[default=-1];overSelling[default=0];preOrder[default=0];reserved[default=0]
+;1101692;pw_warehouse_s;400;notSpecified
+;1101693;pw_warehouse_s;400;notSpecified
+;1101694;pw_warehouse_s;400;notSpecified
+;1101695;pw_warehouse_s;400;notSpecified

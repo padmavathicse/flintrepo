@@ -11,7 +11,7 @@
 #
 # Import the Responsive CMS Site configuration
 #
-$siteUid=flint
+$siteUid=flintgroup
 
 
 # CMS Site - Update the theme to be responsive

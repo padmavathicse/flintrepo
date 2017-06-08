@@ -1,0 +1,10 @@
+#
+# Import the Flint Content Catalog
+#
+
+# Language
+$lang=zh
+
+# Create Content Catalog
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
+ ;flintgroup-zhContentCatalog;"电动工具内容目录"

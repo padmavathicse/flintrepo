@@ -1,8 +1,8 @@
-$contentCatalog=flintContentCatalog
-$contentCatalogName=Flint Content Catalog
+$contentCatalog=flintgroupContentCatalog
+$contentCatalogName=Flintgroup Content Catalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$productCatalog=flintProductCatalog
-$productCatalogName=Flint Product Catalog
+$productCatalog=flintgroupProductCatalog
+$productCatalogName=Flintgroup Product Catalog
 $productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $picture=media(code, $contentCV);
 $image=image(code, $contentCV);
@@ -17,7 +17,7 @@ $jarResourceCms=jar:com.flintgroup.initialdata.constants.Flintyb2bInitialDataCon
 $addonExtensionName=b2bacceleratoraddon
 $medias=medias(code, $contentCV);
 $mediaContainer=media(qualifier, $contentCV);
-$siteUid=flint
+$siteUid=flintgroup
 
 # CMS Site Settings
 UPDATE CMSSite;uid[unique=true];defaultPreviewCategory(code, $productCV);defaultPreviewProduct(code, $productCV)
@@ -63,6 +63,14 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;FootwearCategoryLink;Footwear Category Link;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Safety/Footwear/c/1802;FootwearCategoryLink;FootwearCategoryLink
 ;;FootwearMensCategoryLink;Footwear Men's Category Link;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Safety/Footwear/Mens/c/1805;FootwearMensCategoryLink;FootwearMensCategoryLink
 ;;FootwearWomensCategoryLink;Footwear Women's Category Link;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Safety/Footwear/Womens/c/1806;FootwearWomensCategoryLink;FootwearWomensCategoryLink
+;;DryOffsetCategoryLink;Dry Offset Link;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/dry-offset/c/1899;DryOffsetCategoryLink;DryOffsetCategoryLink
+;;PigmentCategoryLink;Pigment Link;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/pigment/c/1899;PigmentCategoryLink;PigmentCategoryLink
+;;FlexographyCategoryLink;Flexography Link;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/pigment/c/1899;FlexographyCategoryLink;FlexographyCategoryLink
+;;SheetfedCategoryLink;Sheetfed Link;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/pigment/c/1899;SheetfedCategoryLink;SheetfedCategoryLink
+;;UVOffsetCategoryLink;UVOffset Link;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/pigment/c/1899;UVOffsetCategoryLink;UVOffsetCategoryLink
+;;PigmentsCategoryLink;Pigments Link;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/pigment/c/1899;PigmentsCategoryLink;PigmentsCategoryLink
+;;ResinsAndAdditivesCategoryLink;Resins And Additives Link;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/pigment/c/1899;ResinsAndAdditivesCategoryLink;ResinsAndAdditivesCategoryLink
+;;ChipsCategoryLink;Chips Categor Link;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/pigment/c/1899;ChipsCategoryLink;ChipsCategoryLink
 
 # CMS Link Components - Advance search
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;styleAttributes;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
@@ -86,11 +94,15 @@ INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];na
 ;;HandToolsBarComponent;Hand Tools Bar Component;10;HandToolsCategoryLink;;HandToolsNavNode;;HandToolsBarComponent
 ;;MyAccountBarComponent;My Account Bar Component;10;MyAccountLink;right;MyAccountNavNode;RIGHT_EDGE;MyAccountBarComponent
 ;;SafetyBarComponent;Safety Bar Component;10;SafetyCategoryLink;;SafetyNavNode;;SafetyBarComponent
-
+;;DryOffsetBarComponent;Dry Offset Bar Component;10;DryOffsetCategoryLink;;DryOffsetNavNode;;DryOffsetBarComponent
+;;PigmentBarComponent;Pigment Bar Component;10;PigmentCategoryLink;;PigmentNavNode;;PigmentBarComponent
+;;FlexographyBarComponent;Flexography Bar Component;10;FlexographyCategoryLink;;FlexographyNavNode;;FlexographyBarComponent
+;;SheetfedBarComponent;Sheetfed Bar Component;10;SheetfedCategoryLink;;SheetfedNavNode;;SheetfedBarComponent
+;;UVOffsetBarComponent;UV Offset Bar Component;10;UVOffsetCategoryLink;;UVOffsetNavNode;;UVOffsetBarComponent
 # Navigation Bar Collection Component
 INSERT_UPDATE NavigationBarCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
-;;NavBarComponent;Navigation Bar Collection Componeent;PowerDrillsBarComponent,AngleGrindersBarComponent,ScrewdriversBarComponent,SandersBarComponent,MeasuringLayoutToolsBarComponent,HandToolsBarComponent,SafetyBarComponent;NavBarComponent
-
+#;;NavBarComponent;Navigation Bar Collection Componeent;PowerDrillsBarComponent,AngleGrindersBarComponent,ScrewdriversBarComponent,SandersBarComponent,MeasuringLayoutToolsBarComponent,HandToolsBarComponent,SafetyBarComponent;NavBarComponent
+;;NavBarComponent;Navigation Bar Collection Componeent;DryOffsetBarComponent,PigmentBarComponent,FlexographyBarComponent,SheetfedBarComponent,UVOffsetBarComponent;NavBarComponent
 #### CMS Navigation Nodes ####
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;children(uid,$contentCV)[mode=append]
 ;root;;root;;
@@ -113,7 +125,12 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;FollowUsNavNode;;Follow Us Pages;FlintNavNode;AgileCommerceBlogLink,LinkedInLink,FacebookLink,TwitterLink;FollowUsNavNode
 ;SafetyNavNode;;Safety Category;FlintNavNode;;SafetyNavNode
 ;FootwearLinksNavNode;;Footwear Category Links;SafetyNavNode;FootwearMensCategoryLink,FootwearWomensCategoryLink;FootwearLinksNavNode
-
+;DryOffsetNavNode;;Dry Offset Category;FlintNavNode;;DryOffsetNavNode
+;PigmentNavNode;;Pigment Category;FlintNavNode;;PigmentNavNode
+;PigmentLinksNavNode;;Pigments Category Links;PigmentNavNode;ChipsCategoryLink,ResinsAndAdditivesCategoryLink,PigmentsCategoryLink;PigmentLinksNavNode
+;FlexographyNavNode;;Flexography Category;FlintNavNode;;FlexographyNavNode
+;SheetfedNavNode;;Sheetfed Category;FlintNavNode;;SheetfedNavNode
+;UVOffsetNavNode;;UV Offset Category;FlintNavNode;;UVOffsetNavNode
 
 
 #### Jsp Include Component ####

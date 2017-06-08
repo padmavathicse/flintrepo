@@ -1,8 +1,8 @@
 #
 # Import the Flint Content Catalog
 #
-$contentCatalog=flintContentCatalog
-$languages=ja,en,de,zh
+$contentCatalog=flintgroupContentCatalog
+$languages=en,zh
 
 # Content catalog for CMS contents
 INSERT_UPDATE ContentCatalog;id[unique=true]

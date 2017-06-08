@@ -1,12 +1,12 @@
 #
 # Import the CMS Site configuration for the flint store
 #
-$productCatalog=flintProductCatalog
-$contentCatalog=flintContentCatalog
+$productCatalog=flintgroupProductCatalog
+$contentCatalog=flintgroupContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $defaultLanguage=en
-$storeUid=flint
-$siteUid=flint
+$storeUid=flintgroup
+$siteUid=flintgroup
 $webServiceSiteUid=$siteUidWS
 $siteMapLangCur=jaCad,jaUsd,enCad,enUsd,deCad,deUsd,zhCad,zhUsd
 $siteMapUrlLimitPerFile=50000

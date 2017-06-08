@@ -1,0 +1,42 @@
+# ImPex for Importing Product Media into flint Store
+
+
+
+# Macros / Replacement Parameter definitions
+$productCatalog=flintProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$siteResource=jar:com.flintgroup.initialdata.constants.Flintyb2bInitialDataConstants&/flintyb2bInitialDataConstants/import/sampledata/productCatalogs/$productCatalog
+$thumbnail=thumbnail(code, $catalogVersion)
+$picture=picture(code, $catalogVersion)
+$thumbnails=thumbnails(code, $catalogVersion)
+$detail=detail(code, $catalogVersion)
+$normal=normal(code, $catalogVersion)
+$others=others(code, $catalogVersion)
+$data_sheet=data_sheet(code, $catalogVersion)
+$medias=medias(code, $catalogVersion)
+$galleryImages=galleryImages(qualifier, $catalogVersion)
+
+#INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+#;images;images
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion;folder(qualifier)[default=images]
+;1200Wx1200H;/1200Wx1200H/day-graphica-metal-2.jpg;$siteResource/images/1200Wx1200H/day-graphica-metal-2.jpg
+;515Wx515H;/515Wx515H/day-graphica-metal-2.jpg;$siteResource/images/515Wx515H/day-graphica-metal-2.jpg
+;300Wx300H;/300Wx300H/day-graphica-metal-2.jpg;$siteResource/images/300Wx300H/day-graphica-metal-2.jpg
+;96Wx96H;/96Wx96H/day-graphica-metal-2.jpg;$siteResource/images/96Wx96H/day-graphica-metal-2.jpg
+;65Wx65H;/65Wx65H/day-graphica-metal-2.jpg;$siteResource/images/65Wx65H/day-graphica-metal-2.jpg
+;30Wx30H;/30Wx30H/day-graphica-metal-2.jpg;$siteResource/images/30Wx30H/day-graphica-metal-2.jpg
+
+;1200Wx1200H;/1200Wx1200H/day-graphica-metal-xtreme-xtra.jpg;$siteResource/images/1200Wx1200H/day-graphica-metal-xtreme-xtra.jpg
+;515Wx515H;/515Wx515H/day-graphica-metal-xtreme-xtra.jpg;$siteResource/images/515Wx515H/day-graphica-metal-xtreme-xtra.jpg
+;300Wx300H;/300Wx300H/day-graphica-metal-xtreme-xtra.jpg;$siteResource/images/300Wx300H/day-graphica-metal-xtreme-xtra.jpg
+;96Wx96H;/96Wx96H/day-graphica-metal-xtreme-xtra.jpg;$siteResource/images/96Wx96H/day-graphica-metal-xtreme-xtra.jpg
+;65Wx65H;/65Wx65H/day-graphica-metal-xtreme-xtra.jpg;$siteResource/images/65Wx65H/day-graphica-metal-xtreme-xtra.jpg
+;30Wx30H;/30Wx30H/day-graphica-metal-xtreme-xtra.jpg;$siteResource/images/30Wx30H/day-graphica-metal-xtreme-xtra.jpg
+
+;1200Wx1200H;/1200Wx1200H/day-graphica-metal-red-matrix.jpg;$siteResource/images/1200Wx1200H/day-graphica-metal-red-matrix.jpg
+;515Wx515H;/515Wx515H/day-graphica-metal-red-matrix.jpg;$siteResource/images/515Wx515H/day-graphica-metal-red-matrix.jpg
+;300Wx300H;/300Wx300H/day-graphica-metal-red-matrix.jpg;$siteResource/images/300Wx300H/day-graphica-metal-red-matrix.jpg
+;96Wx96H;/96Wx96H/day-graphica-metal-red-matrix.jpg;$siteResource/images/96Wx96H/day-graphica-metal-red-matrix.jpg
+;65Wx65H;/65Wx65H/day-graphica-metal-red-matrix.jpg;$siteResource/images/65Wx65H/day-graphica-metal-red-matrix.jpg
+;30Wx30H;/30Wx30H/day-graphica-metal-red-matrix.jpg;$siteResource/images/30Wx30H/day-graphica-metal-red-matrix.jpg

@@ -1,0 +1,23 @@
+# ImpEx for Importing Categories into flint Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=flintgroup-zhProductCatalog
+$productCatalogName=flintgroup Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=source(code, $catalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+
+$lang=de
+
+# Insert Categories
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;1355
+;1899
+
+# Insert Category Structure
+INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+;1899;1355
+
+UPDATE Category;$catalogVersion;code[unique=true];name[lang=$lang];description[lang=$lang]
+;;1;Open Catalogue;
+;;1899;Dry Offset;

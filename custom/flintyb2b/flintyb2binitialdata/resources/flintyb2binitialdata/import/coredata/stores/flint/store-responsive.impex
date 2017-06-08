@@ -12,7 +12,7 @@
 # Create the BaseStore
 #
 
-$storeUid=flint
+$storeUid=flintgroup
 $checkoutFlowGroup=responsiveCheckoutGroup
 
 # Base Store

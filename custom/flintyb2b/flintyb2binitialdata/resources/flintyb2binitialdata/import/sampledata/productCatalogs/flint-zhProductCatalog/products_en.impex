@@ -1,0 +1,27 @@
+#UTF-8: √Ø¬ø¬Ω√Ø¬ø¬Ω√Ø¬ø¬Ω
+# Localization en
+ 
+# Macros / Replacement Parameter definitions
+$productCatalog=flintgroup-zhProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Language
+$lang=en
+
+
+UPDATE Product;code[unique=true];name[lang=$lang];description[lang=$lang];summary[lang=$lang];$catalogVersion
+ ;1101692;dayGraphica® 429 X-treme;dayGraphica® 429 X-treme;Printing Blankets: For high-speed plastic cup and container printing
+ ;1101693;dayGraphica® Metal 2;dayGraphica® Metal 2;Printing Blankets: Dry Offset - For high-speed 2-piece can printing
+ ;1101694;dayGraphica® X-treme X-tra (N360);dayGraphica® X-treme X-tra (N360);Printing Blankets: For high-speed plastic cup and container printing
+ ;1101695;dayGraphica® Red Matrix;dayGraphica® Red Matrix;Printing Blankets: For high-speed plastic cup and container printing
+ 
+UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];description[lang=$lang];summary[lang=$lang]
+
+;1101692;;dayGraphica® 429 X-treme;-All-metal lever-action keyless blade change allows for quick and easy blade changes.<br/>-All-metal keyless shoe bevel with detents at 0°, 15°, 30° and 45° provides versatility for easy bevel cutting.<br/>-4-position orbital action provides control of cu;dayGraphica® 429 X-treme Adhesive backed, two-piece can decorating blanket
+
+;1101693;;dayGraphica® Metal 2;-All-metal lever-action keyless blade change allows for quick and easy blade changes.<br/>-All-metal keyless shoe bevel with detents at 0°, 15°, 30° and 45° provides versatility for easy bevel cutting.<br/>-4-position orbital action provides control of cu;dayGraphica® Metal 2 Adhesive backed, two-piece can decorating blanket
+
+;1101694;;dayGraphica® X-treme X-tra (N360);-All-metal lever-action keyless blade change allows for quick and easy blade changes.<br/>-All-metal keyless shoe bevel with detents at 0°, 15°, 30° and 45° provides versatility for easy bevel cutting.<br/>-4-position orbital action provides control of cu;Printing Blankets: For high-speed plastic cup and container printing
+
+;1101695;;dayGraphica® Red Matrix;-All-metal lever-action keyless blade change allows for quick and easy blade changes.<br/>-All-metal keyless shoe bevel with detents at 0°, 15°, 30° and 45° provides versatility for easy bevel cutting.<br/>-4-position orbital action provides control of cu;Printing Blankets: For high-speed plastic cup and container printing
+
